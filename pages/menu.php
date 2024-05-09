@@ -1,3 +1,11 @@
+<!-- get data from database -->
+<?php
+    require_once('../config/connection.php');
+    $query = "select * from piatti";
+    $result = mysqli_query($con, $query);
+?>
+
+<!-- html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +46,22 @@
         </div>
         <div class="navbar-end">
 
+            <!-- view cart button-->
+            <div class="flex-none">
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <div class="indicator">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span class="badge badge-sm indicator-item">8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!--Theme controller-->
             <label class="swap swap-rotate">
 
@@ -60,8 +84,49 @@
         </div>
     </div>
 
+    <!--tabella menu-->
+    <div  class="mt-20 flex justify-center items-center ">
+        <div class="overflow-x-auto">
+            <table class="table table-xs">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Ingredients</th>
+                        <th>Price €</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result)) 
+                        {
+                    ?>        
+                        <!-- while condition -->
+                        <td><?php echo $row['codPiatto']; ?></td>
+                        <td><?php echo $row['nomePiatto']; ?></td>
+                        <td><?php echo $row['ingredienti']; ?></td>
+                        <td><?php echo $row['prezzo']; ?></td>
+
+                    </tr>
+                    <?php
+                        }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Ingredients</th>
+                        <th>Price €</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
     <!--footer-->
-    <footer class="footer p-10 bg-neutral text-neutral-content">
+    <footer class="footer p-10 bg-neutral text-neutral-content fixed bottom-0 left-0 right-0">
         <aside>
             <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                 clip-rule="evenodd" class="fill-current">
