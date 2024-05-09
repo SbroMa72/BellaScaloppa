@@ -21,18 +21,19 @@
                             d="M4 6h16M4 12h8m-8 6h16" />
                     </svg>
                 </div>
+                <!-- elementi navbar -->
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Esplora il menu</a></li>
-                    <li><a>About us</a></li>
+                    <li><a href="menu.php">Esplora il menu</a></li>     <!--btn menu -->
+                    <li><a>About us</a></li>    <!-- btn about us -->
                 </ul>
             </div>
             <a href="index.php" class="btn btn-ghost text-xl">Bella Scaloppa</a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a>Esplora il menu</a></li>
-                <li><a href="about.html">About us</a></li>
+                <li><a href="menu.php">Esplora il menu</a></li>     <!--btn menu -->
+                <li><a href="about.html">About us</a></li>      <!-- btn about us -->
             </ul>
         </div>
         <div class="navbar-end">
