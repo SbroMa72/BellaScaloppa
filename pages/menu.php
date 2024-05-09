@@ -1,8 +1,10 @@
 <!-- get data from database -->
 <?php
-    require_once('../config/connection.php');
-    $query = "select * from piatti";
-    $result = mysqli_query($con, $query);
+//connect to db
+require_once ('../config/connection.php');
+
+$query = "select * from piatti";
+$result = mysqli_query($con, $query);
 ?>
 
 <!-- html -->
@@ -56,7 +58,30 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <span class="badge badge-sm indicator-item">8</span>
+                        </div>
+                    </div>
+                    <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                        <div class="card-body">
+
+                            <!-- php code for the subtotal -->
+                            <?php
+                            session_start();
+
+                            $querySub = "select sum(prezzo) from piatti";
+                            $ris = mysqli_query($con, $querySub);
+
+                            while ($row = mysqli_fetch_assoc($ris)) {
+                                ?>
+                                <span class="font-bold text-lg"> Items</span>
+                                <span class="text-info">Subtotal: <?php $subtotal = "select sum(prezzo) from piatti";?></span>
+                                <div class="card-actions">
+                                    <button class="btn btn-primary btn-block">View cart</button>
+                                </div>
+                                <?php
+                            }
+                            ?>
+
+
                         </div>
                     </div>
                 </div>
@@ -84,8 +109,13 @@
         </div>
     </div>
 
-    <!--tabella menu-->
-    <div  class="mt-20 flex justify-center items-center ">
+    <!-- title -->
+    <div class="mt-20 max-w-md mx-auto text-center text-neutral-content jus">
+        <h1 class="mb-5 text-5xl font-bold">Menu</h1>
+    </div>
+
+    <!-- menu table -->
+    <div class="mt-20 flex justify-center items-center ">
         <div class="overflow-x-auto">
             <table class="table table-xs">
                 <thead>
@@ -98,20 +128,29 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <?php
-                        while($row = mysqli_fetch_assoc($result)) 
-                        {
-                    ?>        
-                        <!-- while condition -->
-                        <td><?php echo $row['codPiatto']; ?></td>
-                        <td><?php echo $row['nomePiatto']; ?></td>
-                        <td><?php echo $row['ingredienti']; ?></td>
-                        <td><?php echo $row['prezzo']; ?></td>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <!-- while condition -->
+                            <td><?php echo $row['codPiatto']; ?></td>
+                            <td><?php echo $row['nomePiatto']; ?></td>
+                            <td><?php echo $row['ingredienti']; ?></td>
+                            <td><?php echo $row['prezzo']; ?></td>
 
-                    </tr>
-                    <?php
+                            <!-- order button -->
+                            <td>
+                                <form action="submit" method="post">
+                                    <input type="hidden" name="codPiatto" value="<?php echo $row['codPiatto']; ?>">
+                                    <button class="ml-2 btn btn-outline btn-accent" type="button ">
+                                        Order
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        <?php
                         }
-                    ?>
+                        ?>
                 </tbody>
                 <tfoot>
                     <tr>
