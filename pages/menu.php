@@ -49,67 +49,81 @@ $result = mysqli_query($con, $query);
         </div>
         <div class="navbar-end">
 
-            <!-- view cart button-->
-            <!-- view cart button-->
-            <div class="flex-none">
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                        <div class="indicator">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
+            <!-- cart -->
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="badge badge-sm indicator-item">2</span>
                     </div>
-                    <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                        <div class="card-body">
-                            <!-- PHP code for retrieving cart items -->
-                            <?php
-                            session_start();
+                </div>
+                <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                    <div class="card-body">
 
-                            $querySub = "SELECT sum(prezzo) as totale, GROUP_CONCAT(nomePiatto SEPARATOR ', ') as piatti FROM piatti";
-                            $ris = mysqli_query($con, $querySub);
+                        <!-- PHP code for retrieving cart items -->
+                        <?php
+                        session_start();
 
-                            if ($row = mysqli_fetch_assoc($ris)) {
-                                $totale = $row['totale'];
-                                $piatti = $row['piatti'];
-                                ?>
-                                <span class="font-bold text-lg"> Items</span>
-                                <!-- order table -->
-                                <div class="mb-2 flex justify-center items-center">
-                                    <div class="overflow-x-auto">
-                                        <table class="table table-xs">
-                                            <thead>
-                                                <tr>
-                                                    <th>Dish</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <!-- display cart items -->
-                                                    <td><?php echo $piatti; ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div>
-                                    <!-- display subtotal -->
-                                    <span class="text-info mb-10">Subtotal: <?php echo $totale; ?>€</span>
-                                </div>
-                                <div class="card-actions">
-                                    <!-- button for ordering -->
-                                    <button class="mt-2 btn btn-primary btn-block" onclick="order()">Order now</button>
-                                </div>
-                                <?php
-                            }
+                        $querySub = "SELECT sum(prezzo) as totale, GROUP_CONCAT(nomePiatto SEPARATOR ', ') as piatti FROM piatti";
+                        $ris = mysqli_query($con, $querySub);
+
+                        if ($row = mysqli_fetch_assoc($ris)) 
+                        {
+                            $totale = $row['totale'];
+                            $piatti = $row['piatti'];
                             ?>
-                        </div>
+                            <span class="font-bold text-lg"> Items</span>
+                            
+                            <!-- order table -->
+                            <div class="mb-2 flex justify-center items-center">
+                                <div class="overflow-x-auto">
+                                    <table class="table table-xs">
+                                        <thead>
+                                            <tr>
+                                                <th>Dish</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <!-- display cart items -->
+                                                <td><?php echo $piatti; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- display subtotal -->
+                                <span class="text-info mb-10">Subtotal: <?php echo $totale; ?>€</span>
+                            </div>
+                            <div class="card-actions">
+                                <!-- button for ordering -->
+                                <button class="mt-2 btn btn-primary btn-block" onclick="order()">Order now</button>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
 
+            <!-- user -->
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component"
+                            src="https://cdn-icons-png.flaticon.com/128/149/149071.png" />
+                    </div>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
 
             <!--Theme controller-->
             <label class="swap swap-rotate">
@@ -223,7 +237,7 @@ $result = mysqli_query($con, $query);
             </div>
         </nav>
     </footer>
-    <script src="../config/order.js">
-</body >
+    <script src="../config/order.js"></script>
+</body>
 
-</html >
+</html>
