@@ -15,6 +15,7 @@ $result = mysqli_query($con, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Menu</title>
 </head>
@@ -49,6 +50,7 @@ $result = mysqli_query($con, $query);
         <div class="navbar-end">
 
             <!-- view cart button-->
+            <!-- view cart button-->
             <div class="flex-none">
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -62,30 +64,52 @@ $result = mysqli_query($con, $query);
                     </div>
                     <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                         <div class="card-body">
-
-                            <!-- php code for the subtotal -->
+                            <!-- PHP code for retrieving cart items -->
                             <?php
                             session_start();
 
-                            $querySub = "select sum(prezzo) from piatti";
+                            $querySub = "SELECT sum(prezzo) as totale, GROUP_CONCAT(nomePiatto SEPARATOR ', ') as piatti FROM piatti";
                             $ris = mysqli_query($con, $querySub);
 
-                            while ($row = mysqli_fetch_assoc($ris)) {
+                            if ($row = mysqli_fetch_assoc($ris)) {
+                                $totale = $row['totale'];
+                                $piatti = $row['piatti'];
                                 ?>
                                 <span class="font-bold text-lg"> Items</span>
-                                <span class="text-info">Subtotal: <?php $subtotal = "select sum(prezzo) from piatti";?></span>
+                                <!-- order table -->
+                                <div class="mb-2 flex justify-center items-center">
+                                    <div class="overflow-x-auto">
+                                        <table class="table table-xs">
+                                            <thead>
+                                                <tr>
+                                                    <th>Dish</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <!-- display cart items -->
+                                                    <td><?php echo $piatti; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- display subtotal -->
+                                    <span class="text-info mb-10">Subtotal: <?php echo $totale; ?>€</span>
+                                </div>
                                 <div class="card-actions">
-                                    <button class="btn btn-primary btn-block">View cart</button>
+                                    <!-- button for ordering -->
+                                    <button class="mt-2 btn btn-primary btn-block" onclick="order()">Order now</button>
                                 </div>
                                 <?php
                             }
                             ?>
-
-
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!--Theme controller-->
             <label class="swap swap-rotate">
@@ -139,7 +163,7 @@ $result = mysqli_query($con, $query);
 
                             <!-- order button -->
                             <td>
-                                <form action="submit" method="post">
+                                <form method="post">
                                     <input type="hidden" name="codPiatto" value="<?php echo $row['codPiatto']; ?>">
                                     <button class="ml-2 btn btn-outline btn-accent" type="button ">
                                         Order
@@ -199,6 +223,7 @@ $result = mysqli_query($con, $query);
             </div>
         </nav>
     </footer>
-</body>
+    <script src="../config/order.js">
+</body >
 
-</html>
+</html >
