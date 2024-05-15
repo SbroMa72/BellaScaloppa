@@ -17,6 +17,7 @@ $result = mysqli_query($con, $query);
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../config/order.js"></script>
     <title>Menu</title>
 </head>
 
@@ -102,7 +103,7 @@ $result = mysqli_query($con, $query);
                             </div>
                             <div class="card-actions">
                                 <!-- button for ordering -->
-                                <button class="mt-2 btn btn-primary btn-block" onclick="order()">Order now</button>
+                                <a href="order.php" class="mt-2 btn btn-primary btn-block" onclick="order()">Order now</a>
                             </div>
                             <?php
                         }
@@ -179,9 +180,7 @@ $result = mysqli_query($con, $query);
                             <td>
                                 <form method="post">
                                     <input type="hidden" name="codPiatto" value="<?php echo $row['codPiatto']; ?>">
-                                    <button class="ml-2 btn btn-outline btn-accent" type="button ">
-                                        Order
-                                    </button>
+                                    <button class="ml-2 btn btn-outline btn-accent" type="button "> Order</button>
                                 </form>
                             </td>
 
@@ -237,7 +236,6 @@ $result = mysqli_query($con, $query);
             </div>
         </nav>
     </footer>
-    <script src="../config/order.js"></script>
 </body>
 
 </html>
