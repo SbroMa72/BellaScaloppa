@@ -1,4 +1,12 @@
+<!-- php code for the login check -->
+<?php
+session_start();
 
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    header("Location: profile.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../config/user.js"></script>
     <title>Bella Scaloppa</title>
 </head>
 
@@ -44,12 +53,14 @@
             <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
+                        <a href="logi"></a>
                         <img alt="Tailwind CSS Navbar component"
                             src="https://cdn-icons-png.flaticon.com/128/149/149071.png" />
                     </div>
                 </div>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Login</a></li>
                     <li><a>Logout</a></li>
                 </ul>
             </div>

@@ -17,7 +17,7 @@ $result = mysqli_query($con, $query);
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../config/order.js"></script>
+    <script src="../config/js/order.js"></script>
     <title>Menu</title>
 </head>
 
@@ -72,13 +72,12 @@ $result = mysqli_query($con, $query);
                         $querySub = "SELECT sum(prezzo) as totale, GROUP_CONCAT(nomePiatto SEPARATOR ', ') as piatti FROM piatti";
                         $ris = mysqli_query($con, $querySub);
 
-                        if ($row = mysqli_fetch_assoc($ris)) 
-                        {
+                        if ($row = mysqli_fetch_assoc($ris)) {
                             $totale = $row['totale'];
                             $piatti = $row['piatti'];
                             ?>
                             <span class="font-bold text-lg"> Items</span>
-                            
+
                             <!-- order table -->
                             <div class="mb-2 flex justify-center items-center">
                                 <div class="overflow-x-auto">

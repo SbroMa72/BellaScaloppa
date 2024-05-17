@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>My order</title>
+    <title>My profile</title>
 </head>
 
 <body>
@@ -72,16 +72,33 @@
         </div>
     </div>
 
-    <!-- container -->
-    <div class="artboard phone-3 max-w-md mx-auto text-center text-neutral-content jus">
-        <!-- order title -->
-        <div class="mt-20 max-w-md mx-auto text-center text-neutral-content jus">
-            <h3 class="mb-5 text-5xl font-bold">Thank you for the order</h3>
-        </div>
+    <!-- title -->
+    <div class="mt-20 max-w-md mx-auto text-center text-neutral-content jus">
+        <h1 class="mb-5 text-5xl font-bold">Profile</h1>
+    </div>
 
-        <!-- order id -->
-        <div class="mt-15 max-w-md mx-auto text-center text-neutral-content jus">
-            <p class="mb-5 text-3xl font-italic">Order ID: 123456789</p>
+    <!-- login form -->
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <form class="card-body">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">username</span>
+                        </label>
+                        <input type="email" placeholder="email" class="input input-bordered" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input type="password" placeholder="password" class="input input-bordered" required />
+                    </div>
+                    <div class="form-control mt-6">
+                        <button class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

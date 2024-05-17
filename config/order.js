@@ -19,6 +19,7 @@ function inviaOrdine(codPiatto, nomeCliente, nomePiatto, prezzo) {
       prezzo: prezzo,
     },
     success: function (response) {
+      alert(response);
       // Dopo aver inviato l'ordine con successo, aggiorna il carrello
       aggiornaCarrello();
     },
@@ -34,7 +35,7 @@ function aggiornaCarrello() {
     type: "GET",
     url: "../config/recupera_ordini.php",
     success: function (response) {
-      console.log(response); // Aggiungi questa riga di codice
+      console.log(response); 
       aggiornaTabellaCarrello(JSON.parse(response));
     },
     error: function (xhr, status, error) {
