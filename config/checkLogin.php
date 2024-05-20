@@ -1,23 +1,24 @@
-<?php
-session_start();
+<?PHP
 
-include("connection.php");
+    require_once ('../config/connection.php');
 
-// Controlla se l'utente esiste e se la password è corretta
-if ($id && password_verify($_POST['password'], $hashed_password)) {
-    // Imposta la variabile di sessione loggedin su true
-    $_SESSION['loggedin'] = true;
-    $_SESSION['id'] = $id;
+    $username =$_POST["username"];
+    $password =$_POST["password"];
 
-    // Reindirizza l'utente alla pagina del profilo
-    header("Location: profile.php");
-    exit;
-} else {
-    // Imposta la variabile di sessione loggedin su false
-    $_SESSION['loggedin'] = false;
+    $stmt= $conn -> prepare ("SELECT * FROM utenti WHERE username=? AND password=?");
+    $stmt -> bind_param("ss", $username, $password);
+    $stmt->execute();
 
-    // Reindirizza l'utente alla pagina di login
-    header("Location: login.php");
-    exit;
-}
+    $result = $stmt -> get_result();
+
+    if($result -> num_rows == 1){
+        $row = $result -> fetch_assoc();
+        $_SESSION["logged-in"]=true;
+        $_SESSION["username"]=$username;
+        $_SESSION["ID"]=$row["ID"];
+        echo true;
+    }else{
+        echo "credenziali errate";
+    }
+    
 ?>

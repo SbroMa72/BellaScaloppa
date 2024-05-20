@@ -1,3 +1,12 @@
+<!-- get data from database -->
+<?php
+    //connect to db
+    require_once ('../config/connection.php');
+
+    $query = "select * from piatti";
+    $result = mysqli_query($con, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,6 +91,49 @@
         <!-- order id -->
         <div class="mt-15 max-w-md mx-auto text-center text-neutral-content jus">
             <p class="mb-5 text-3xl font-italic">Order ID: 123456789</p>
+        </div>
+
+        <!-- order recap -->
+        <div class="mt-15 max-w-md mx-auto text-center text-neutral-content jus">
+            <table class="table table-xs">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <!-- while condition -->
+                            <td><?php echo $row['codPiatto']; ?></td>
+                            <td><?php echo $row['nomePiatto']; ?></td>
+                            <td><?php echo $row['ingredienti']; ?></td>
+                            <td><?php echo $row['prezzo']; ?></td>
+
+                            <!-- order button -->
+                            <td>
+                                <form method="post">
+                                    <input type="hidden" name="codPiatto" value="<?php echo $row['codPiatto']; ?>">
+                                    <button class="ml-2 btn btn-outline btn-accent" type="button "> Order</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Ingredients</th>
+                        <th>Price €</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </body>

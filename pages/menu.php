@@ -121,7 +121,7 @@ $result = mysqli_query($con, $query);
                 </div>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Logout</a></li>
+                    <li><a href="index.php">Logout</a></li>
                 </ul>
             </div>
 
